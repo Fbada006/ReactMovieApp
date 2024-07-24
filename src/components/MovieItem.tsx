@@ -7,11 +7,11 @@ type MovieProp = {
 
 const MovieItem = ({movie}: MovieProp) => {
   const {title, release_date, vote_average, backdrop_path} = movie;
-  const {container, dateRating, image} = styles;
+  const {container, dateRating, image, titleStyle, subTitleStyle} = styles;
 
   return (
     <View style={container}>
-      <Text>{title}</Text>
+      <Text style={titleStyle}>{title}</Text>
       <Image
         style={image}
         source={{
@@ -19,8 +19,8 @@ const MovieItem = ({movie}: MovieProp) => {
         }}
       />
       <View style={dateRating}>
-        <Text>{release_date}</Text>
-        <Text>{`Rating: ${vote_average}`}</Text>
+        <Text style={subTitleStyle}>{release_date}</Text>
+        <Text style={subTitleStyle}>{`Rating: ${vote_average}`}</Text>
       </View>
     </View>
   );
@@ -46,6 +46,15 @@ const styles = StyleSheet.create({
     height: 250,
     marginTop: 10,
     marginBottom: 10,
+  },
+  titleStyle: {
+    fontSize: 21,
+    fontWeight: "bold",
+  },
+  subTitleStyle: {
+    fontSize: 17,
+    fontWeight: "semibold",
+    fontStyle: "italic",
   },
 });
 
