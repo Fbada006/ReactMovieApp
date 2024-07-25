@@ -1,9 +1,10 @@
 import React from "react";
-import {SafeAreaView, useColorScheme} from "react-native";
+import {useColorScheme} from "react-native";
 import {Colors} from "react-native/Libraries/NewAppScreen";
 import {MovieScreen} from "./src/screens/MovieScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {NavigationContainer} from "@react-navigation/native";
+import MovieDetailsScreen from "./src/screens/MovieDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ function App(): React.JSX.Element {
           name="Discover-Movies"
           component={MovieScreen}
           options={{title: "Discover Movies"}}
+        />
+        <Stack.Screen
+          name="Movie-Details"
+          component={MovieDetailsScreen}
+          options={{title: "Movie Details"}}
         />
       </Stack.Navigator>
     </NavigationContainer>
