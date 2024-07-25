@@ -1,12 +1,23 @@
-import {FlatList, ListRenderItem} from "react-native";
+import {FlatList, ListRenderItem, TouchableOpacity} from "react-native";
 import {SafeAreaView, StatusBar, StyleSheet} from "react-native";
 import {SAMPLE_JSON} from "../utils/Constants";
 import MovieItem from "../components/MovieItem";
+import {useNavigation} from "@react-navigation/native";
 
 export const MovieScreen = () => {
+  const navigation: any = useNavigation();
   const {container} = styles;
+
+  const _onPress = (item: Movie) => {
+    navigation.navigate("Movie-Details", {item});
+  };
+
   const renderItem: ListRenderItem<Movie> = ({item}) => {
-    return <MovieItem movie={item} />;
+    return (
+      <TouchableOpacity onPress={() => _onPress(item)}>
+        <MovieItem movie={item} />
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -23,6 +34,5 @@ export const MovieScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
   },
 });
