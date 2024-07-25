@@ -8,8 +8,8 @@ export const MovieScreen = () => {
   const navigation: any = useNavigation();
   const {container} = styles;
 
-  const _onPress = (movie: Movie) => {
-    navigation.navigate("Movie-Details", {movie});
+  const _onPress = (item: Movie) => {
+    navigation.navigate("Movie-Details", {item});
   };
 
   const renderItem: ListRenderItem<Movie> = ({item}) => {
