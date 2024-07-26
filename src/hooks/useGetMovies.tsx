@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Config from "react-native-config";
+import {TMDB_BASE_URL} from "../utils/Constants";
 
 export const useGetMovies = () => {
   const [loading, setLoading] = useState(true);
@@ -15,10 +16,7 @@ export const useGetMovies = () => {
   };
 
   useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
-      options,
-    )
+    fetch(`${TMDB_BASE_URL}/discover/movie`, options)
       .then(response => response.json())
       .then(data => {
         setMovies(data);
