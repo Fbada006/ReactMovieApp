@@ -17,8 +17,6 @@ export const MovieScreen = () => {
   const {container} = styles;
   const response = movies as ApiResponse;
 
-  console.log(loading, error, movies);
-
   const _onPress = (item: Movie) => {
     navigation.navigate("Movie-Details", {item});
   };
