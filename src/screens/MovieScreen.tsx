@@ -6,7 +6,6 @@ import {
   View,
 } from "react-native";
 import {SafeAreaView, StatusBar, StyleSheet} from "react-native";
-import {SAMPLE_JSON} from "../utils/Constants";
 import MovieItem from "../components/MovieItem";
 import {useNavigation} from "@react-navigation/native";
 import {useGetMovies} from "../hooks/useGetMovies";
