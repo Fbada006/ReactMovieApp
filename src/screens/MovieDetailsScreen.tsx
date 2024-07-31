@@ -1,7 +1,10 @@
 import {useNavigation, useRoute} from "@react-navigation/native";
 import {useEffect} from "react";
-import {Image, StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {TMDB_IMAGE_BASE_URL} from "../utils/Constants";
+import Image from "react-native-image-progress";
+import {LoadingIndicator} from "../components/LoadingIndicator";
+import {renderError} from "../components/MovieItem";
 
 const MovieDetailsScreen = () => {
   const navigation = useNavigation();
@@ -30,6 +33,8 @@ const MovieDetailsScreen = () => {
         source={{
           uri: `${TMDB_IMAGE_BASE_URL}${backdrop_path}`,
         }}
+        indicator={LoadingIndicator}
+        renderError={renderError}
       />
       <Text style={titleStyle}>{title}</Text>
       <Text style={overviewStyle}>{overview}</Text>

@@ -1,26 +1,21 @@
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
 import Image from "react-native-image-progress";
 import {TMDB_IMAGE_BASE_URL} from "../utils/Constants";
+import {LoadingIndicator} from "./LoadingIndicator";
 
 type MovieProp = {
   movie: Movie;
 };
 
+export const renderError = (error: Error) => (
+  <View>
+    <Text>Error</Text>
+  </View>
+);
+
 const MovieItem = ({movie}: MovieProp) => {
   const {title, release_date, vote_average, backdrop_path} = movie;
   const {container, dateRating, image, titleStyle, subTitleStyle} = styles;
-
-  const CustomLoadingIndicator = () => (
-    <View>
-      <ActivityIndicator size={"large"} color={"blue"} />
-    </View>
-  );
-
-  const renderError = (error: Error) => (
-    <View>
-      <Text>Error</Text>
-    </View>
-  );
 
   return (
     <View style={container}>
@@ -30,7 +25,7 @@ const MovieItem = ({movie}: MovieProp) => {
         source={{
           uri: `${TMDB_IMAGE_BASE_URL}${backdrop_path}`,
         }}
-        indicator={CustomLoadingIndicator}
+        indicator={LoadingIndicator}
         renderError={renderError}
       />
       <View style={dateRating}>
