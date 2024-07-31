@@ -1,4 +1,5 @@
-import {Image, StyleSheet, Text, View} from "react-native";
+import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
+import Image from "react-native-image-progress";
 import {TMDB_IMAGE_BASE_URL} from "../utils/Constants";
 
 type MovieProp = {
@@ -9,6 +10,18 @@ const MovieItem = ({movie}: MovieProp) => {
   const {title, release_date, vote_average, backdrop_path} = movie;
   const {container, dateRating, image, titleStyle, subTitleStyle} = styles;
 
+  const CustomLoadingIndicator = () => (
+    <View>
+      <ActivityIndicator size={"large"} color={"blue"} />
+    </View>
+  );
+
+  const renderError = (error: Error) => (
+    <View>
+      <Text>Error</Text>
+    </View>
+  );
+
   return (
     <View style={container}>
       <Text style={titleStyle}>{title}</Text>
@@ -17,6 +30,8 @@ const MovieItem = ({movie}: MovieProp) => {
         source={{
           uri: `${TMDB_IMAGE_BASE_URL}${backdrop_path}`,
         }}
+        indicator={CustomLoadingIndicator}
+        renderError={renderError}
       />
       <View style={dateRating}>
         <Text style={subTitleStyle}>{release_date}</Text>

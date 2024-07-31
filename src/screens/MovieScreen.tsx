@@ -14,7 +14,7 @@ import ErrorItem from "../components/ErrorItem";
 export const MovieScreen = () => {
   const [loading, error, movies] = useGetMovies();
   const navigation: any = useNavigation();
-  const {container} = styles;
+  const {container, loadingStyle} = styles;
   const response = movies as ApiResponse;
 
   const _onPress = (item: Movie) => {
@@ -42,11 +42,11 @@ export const MovieScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={container}>
       {error ? (
         <ErrorItem />
       ) : (
-        <ActivityIndicator size={"large"} color={"blue"} />
+        <ActivityIndicator style={loadingStyle} size={"large"} color={"blue"} />
       )}
     </View>
   );
@@ -55,5 +55,10 @@ export const MovieScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loadingStyle: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
