@@ -34,58 +34,66 @@ export const useGetMovies = () => {
     });
   };
 
+  const insertMovieData = (movie: Movie) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        "INSERT INTO Movies (id, title, release_date, vote_average, backdrop_path) VALUES (?,?,?,?,?)",
+        [
+          movie.id,
+          movie.title,
+          movie.release_date,
+          movie.vote_average,
+          movie.backdrop_path,
+        ],
+        () => {
+          console.log("Movie values successfully saved to the database");
+        },
+        error => {
+          console.log(`Could not save values to db ${error}`);
+        },
+      );
+    });
+  };
+
+  const getMoviesFromDb = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        "SELECT * FROM Movies",
+        [],
+        (tx, result) => {
+          const len = result.rows.length;
+          if (len > 0) {
+            const movies: Movie[] = [];
+            for (let i = 0; i < len; i++) {
+              const row = result.rows.item(i);
+              movies.push(row);
+            }
+            setMovies(movies);
+          } else {
+            setError(
+              "There is no data in the cache. Please refresh with an internet connection and try again!",
+            );
+          }
+        },
+        error => {
+          setError("Could not get the data from cache. Please try again!");
+        },
+      );
+    });
+  };
+
   const getAndSaveMovies = () => {
     fetch(`${TMDB_BASE_URL}/discover/movie`, options)
       .then(response => response.json())
       .then(data => {
         const response = data as ApiResponse;
         for (const movie of response.results) {
-          db.transaction(tx => {
-            tx.executeSql(
-              "INSERT INTO Movies (id, title, release_date, vote_average, backdrop_path) VALUES (?,?,?,?,?)",
-              [
-                movie.id,
-                movie.title,
-                movie.release_date,
-                movie.vote_average,
-                movie.backdrop_path,
-              ],
-              () => {
-                console.log("Movie values successfully saved to the database");
-              },
-              error => {
-                console.log(`Could not save values to db ${error}`);
-              },
-            );
-          });
+          insertMovieData(movie);
         }
       })
       .finally(() => {
         setLoading(false);
-        db.transaction(tx => {
-          tx.executeSql(
-            "SELECT * FROM Movies",
-            [],
-            (tx, result) => {
-              const len = result.rows.length;
-              if (len > 0) {
-                const movies: Movie[] = [];
-                for (let i = 0; i < len; i++) {
-                  const row = result.rows.item(i);
-                  movies.push(row);
-                }
-                setMovies(movies);
-              } else {
-                setError(
-                  "There is no data in the cache. Please refresh with an internet connection and try again!",
-                );
-              }
-            },
-            error => {
-              setError("Could not get the data from cache. Please try again!");
-            },
-          );
-        });
+        getMoviesFromDb();
       });
   };
 
