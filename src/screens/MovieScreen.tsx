@@ -15,7 +15,6 @@ export const MovieScreen = () => {
   const [loading, error, movies] = useGetMovies();
   const navigation: any = useNavigation();
   const {container, loadingStyle} = styles;
-  const response = movies as ApiResponse;
 
   const _onPress = (item: Movie) => {
     navigation.navigate("Movie-Details", {item});
@@ -33,7 +32,7 @@ export const MovieScreen = () => {
     return (
       <SafeAreaView style={container}>
         <FlatList
-          data={response.results}
+          data={movies as Movie[]}
           renderItem={renderItem}
           keyExtractor={(movie: Movie) => movie.id}
         />
