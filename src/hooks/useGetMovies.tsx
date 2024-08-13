@@ -20,7 +20,7 @@ export const useGetMovies = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzMyN2E4Mjg1YzgwMzBjYTc2NWM2NTE5N2IzMDBjZSIsIm5iZiI6MTcyMjAwNzQwNS43MTg5MDQsInN1YiI6IjViZjY0Y2EzOTI1MTQxNWNjMTBiZjY4MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.R3lPzGcUhU7a_nGLeftFJ0UsNAyYrRavzZDwShQ2Vjk`,
+      Authorization: `Bearer YOUR AUTH HERE`,
     },
   };
 
