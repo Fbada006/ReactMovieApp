@@ -20,7 +20,7 @@ export const useGetMovies = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer YOUR AUTH HERE`,
+      Authorization: `Bearer ${Config.TMDB_AUTH}`,
     },
   };
 

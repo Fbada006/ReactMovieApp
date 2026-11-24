@@ -1,4 +1,10 @@
-This is a movie application done in React and Typescript using the TMDB API. Get your API KEY there or authorization and paste it in the `useGetMovies.tsx` file
+This is a movie application done in React and Typescript using the TMDB API. Get an API read access token from TMDB and put it in a `.env` file at the project root (it is gitignored):
+
+```
+TMDB_AUTH=your_read_access_token
+```
+
+The app reads it through `react-native-config`.
 
 # How to run the project
 
