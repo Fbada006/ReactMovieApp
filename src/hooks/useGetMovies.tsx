@@ -91,6 +91,9 @@ export const useGetMovies = () => {
           insertMovieData(movie);
         }
       })
+      .catch(() => {
+        // Offline or the request failed: fall back to whatever is cached.
+      })
       .finally(() => {
         setLoading(false);
         getMoviesFromDb();
